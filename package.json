@@ -23,6 +23,8 @@
   },
   "homepage": "https://github.com/Sloansta/wordle-term#readme",
   "dependencies": {
+    "chalk": "^5.0.0",
     "random-words": "^1.1.2"
-  }
+  },
+  "type": "module"
 }

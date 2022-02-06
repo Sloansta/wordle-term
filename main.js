@@ -1,7 +1,8 @@
-const randomWords = require('random-words');
+import randomWords from 'random-words';
+import chalk from 'chalk';
+const word = findWordleWord();
 
-let word = findWordleWord();
-
+// using recursian to ensure that the user will get a 5 letter word without calling for too big of a word count
 function findWordleWord() {
     const wrd = randomWords({exactly: 5, maxLength: 5});
     for(let i = 0; i < wrd.length; i++) {
@@ -12,4 +13,4 @@ function findWordleWord() {
     findWordleWord();
 }
 
-console.log(word);
+console.log(chalk.white.bgYellow(word));
