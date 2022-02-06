@@ -33,3 +33,4 @@ function checkLetter(wrd, guess) {
 }
 
 console.log(checkLetter(word, 'water'));
+console.log(word); // this is just for debugging 
