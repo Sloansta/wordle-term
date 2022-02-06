@@ -1,0 +1,28 @@
+{
+  "name": "wordle-term",
+  "version": "0.0.1",
+  "description": "Play wordle in the terminal",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sloansta/wordle-term.git"
+  },
+  "keywords": [
+    "wordle",
+    "english",
+    "language",
+    "terminal"
+  ],
+  "author": "Sloansta",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/Sloansta/wordle-term/issues"
+  },
+  "homepage": "https://github.com/Sloansta/wordle-term#readme",
+  "dependencies": {
+    "random-words": "^1.1.2"
+  }
+}
