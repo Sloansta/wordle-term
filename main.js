@@ -36,6 +36,8 @@ function checkLetter(wrd, guess) {
     return wordChart;
 }
 
+// this is a recursive async function that will wait for prompt to finish getting user information
+// to then execute once the user has hit enter. More checks to be added soon
 async function guessWord() {
     if(guessCount <= maxGuessCount) {
         console.log('Better luck next time. The word was ' + word);
