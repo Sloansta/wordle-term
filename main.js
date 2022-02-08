@@ -1,8 +1,11 @@
 import randomWords from 'random-words';
 import chalk from 'chalk';
+import prompt from 'prompts';
+
+let wordChart = "";
 const word = findWordleWord();
-let guessCount = 0;
-const maxGuessCount = 6;
+let guessCount = 6;
+const maxGuessCount = 0;
 
 // using recursian to ensure that the user will get a 5 letter word without calling for too big of a word count
 function findWordleWord() {
@@ -29,8 +32,28 @@ function checkLetter(wrd, guess) {
     }
 
     const cycledWord = wordArr.join('|');
-    return cycledWord;
+    wordChart += cycledWord + '\n';
+    return wordChart;
 }
 
-console.log(checkLetter(word, 'water'));
-console.log(word); // this is just for debugging 
+async function guessWord() {
+    if(guessCount <= maxGuessCount) {
+        console.log('Better luck next time. The word was ' + word);
+        return;
+    }
+    else {
+        const guess = await prompt({
+            type: 'text',
+            name: 'guess',
+            message: `(${guessCount} guesses remain) Guess a 5 letter word: `
+        });
+        console.log(checkLetter(word, guess.guess));
+        console.log(word); // this is just for debugging 
+        guessCount--;
+        guessWord();
+    }
+}
+
+guessWord();
+
+//console.log(checkLetter(word, 'water'));
