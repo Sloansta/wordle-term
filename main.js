@@ -21,9 +21,16 @@ function findWordleWord() {
 // this will check to see if the characters match in the word
 // What we will want to do is take the generated word, and then match it against the guess character by character 
 function checkLetter(wrd, guess) {
+    if(guess.length > 5) {
+        console.log('Word too long, try again.');
+        return false;
+    } else if(guess.length < 5) {
+        console.log('Word too short, try again');
+        return false;
+    }
     const wordArr = guess.split('');
     for(let i = 0; i < wordArr.length; i++) {
-        if(wordArr[i] == wrd[i]) 
+        if(wrd[i] == wordArr[i]) 
             wordArr[i] = chalk.white.bgGreen(wordArr[i].toUpperCase());
         else if(wrd.includes(wordArr[i])) 
             wordArr[i] = chalk.white.bgYellow(wordArr[i].toUpperCase());
@@ -33,12 +40,14 @@ function checkLetter(wrd, guess) {
 
     const cycledWord = wordArr.join('|');
     wordChart += cycledWord + '\n';
-    return wordChart;
+    console.log(wordChart);
+    return true;
 }
 
 // this is a recursive async function that will wait for prompt to finish getting user information
 // to then execute once the user has hit enter. More checks to be added soon
 async function guessWord() {
+    //console.log(word);
     if(guessCount <= maxGuessCount) {
         console.log('Better luck next time. The word was ' + word);
         return;
@@ -49,10 +58,20 @@ async function guessWord() {
             name: 'guess',
             message: `(${guessCount} guesses remain) Guess a 5 letter word: `
         });
-        console.log(checkLetter(word, guess.guess));
-        console.log(word); // this is just for debugging 
-        guessCount--;
-        guessWord();
+
+        let validGuess = checkLetter(word, guess.guess);
+
+        if(guess.guess == word) {
+            console.log('Good work! You guessed the word.');
+            return;
+        }
+
+        if(validGuess) {
+            guessCount--;
+            guessWord();
+        }
+        else if(!validGuess)
+            guessWord();
     }
 }
 
