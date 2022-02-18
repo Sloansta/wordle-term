@@ -1,4 +1,4 @@
-import randomWords from 'random-words';
+import randomWords from './src/words.js';
 import chalk from 'chalk';
 import prompt from 'prompts';
 
@@ -9,13 +9,8 @@ const maxGuessCount = 0;
 
 // using recursian to ensure that the user will get a 5 letter word without calling for too big of a word count
 function findWordleWord() {
-    const wrd = randomWords({exactly: 5, maxLength: 5});
-    for(let i = 0; i < wrd.length; i++) {
-        if(wrd[i].length == 5)
-            return wrd[i];
-    }
-
-    findWordleWord();
+    const wrd = randomWords[random(randomWords.length - 1)];
+    return wrd;
 }
 
 // this will check to see if the characters match in the word
@@ -44,10 +39,14 @@ function checkLetter(wrd, guess) {
     return true;
 }
 
+function random(max) {
+    return Math.floor(Math.random() * max);
+}
+
 // this is a recursive async function that will wait for prompt to finish getting user information
 // to then execute once the user has hit enter. More checks to be added soon
 async function guessWord() {
-    //console.log(word);
+    // console.log(word); this is used for debug mode
     if(guessCount <= maxGuessCount) {
         console.log('Better luck next time. The word was ' + word);
         return;
@@ -76,5 +75,3 @@ async function guessWord() {
 }
 
 guessWord();
-
-//console.log(checkLetter(word, 'water'));
