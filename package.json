@@ -1,6 +1,6 @@
 {
   "name": "wordle-term",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Play wordle in the terminal",
   "main": "main.js",
   "scripts": {
@@ -16,6 +16,9 @@
     "language",
     "terminal"
   ],
+  "bin": {
+    "wordle-term": "main.js"
+  }, 
   "author": "Sloansta",
   "license": "GPL-3.0",
   "bugs": {
