@@ -1,7 +1,7 @@
 # wordle-term
 Play wordle in the terminal!
 
-## Instalation 
+## Installation 
 ``` npm install -g wordle-term ```
 
 ## Demo
