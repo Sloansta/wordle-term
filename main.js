@@ -1,5 +1,5 @@
-const randomWords = require('./src/words');
 const chalk = require('chalk');
+const randomWords = require('./src/words');
 const prompt = require('prompts');
 
 let wordChart = "";
