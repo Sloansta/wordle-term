@@ -5758,4 +5758,4 @@ const words = [
     'pupal',
   ];
 
-  export default words;
+module.exports = words;

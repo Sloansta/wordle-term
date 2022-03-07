@@ -1,6 +1,6 @@
-import randomWords from './src/words.js';
-import chalk from 'chalk';
-import prompt from 'prompts';
+const randomWords = require('./src/words');
+const chalk = require('chalk');
+const prompt = require('prompts');
 
 let wordChart = "";
 const word = findWordleWord();
