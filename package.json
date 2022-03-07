@@ -1,6 +1,6 @@
 {
   "name": "wordle-term",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Play wordle in the terminal",
   "main": "main.js",
   "scripts": {

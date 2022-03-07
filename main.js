@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const chalk = require('chalk');
 const randomWords = require('./src/words');
 const prompt = require('prompts');
