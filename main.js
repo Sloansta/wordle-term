@@ -3,11 +3,13 @@
 const chalk = require('chalk');
 const randomWords = require('./src/words');
 const prompt = require('prompts');
+//const tty = require('tty');
 
 let wordChart = "";
 const word = findWordleWord();
 let guessCount = 6;
 const maxGuessCount = 0;
+let exitGame = false;
 
 // using recursian to ensure that the user will get a 5 letter word without calling for too big of a word count
 function findWordleWord() {
@@ -18,27 +20,29 @@ function findWordleWord() {
 // this will check to see if the characters match in the word
 // What we will want to do is take the generated word, and then match it against the guess character by character 
 function checkLetter(wrd, guess) {
-    if(guess.length > 5) {
-        console.log('Word too long, try again.');
-        return false;
-    } else if(guess.length < 5) {
-        console.log('Word too short, try again');
-        return false;
+    if(!exitGame) {
+        if(guess.length > 5) {
+            console.log('Word too long, try again.');
+            return false;
+        } else if(guess.length < 5) {
+            console.log('Word too short, try again');
+            return false;
+        }
+        const wordArr = guess.split('');
+        for(let i = 0; i < wordArr.length; i++) {
+            if(wrd[i] == wordArr[i]) 
+                wordArr[i] = chalk.white.bgGreen(wordArr[i].toUpperCase());
+            else if(wrd.includes(wordArr[i])) 
+                wordArr[i] = chalk.white.bgYellow(wordArr[i].toUpperCase());
+            else 
+                wordArr[i] = chalk.white.bgBlack(wordArr[i].toUpperCase());
+        }
+    
+        const cycledWord = wordArr.join('|');
+        wordChart += cycledWord + '\n';
+        console.log(wordChart);
+        return true;
     }
-    const wordArr = guess.split('');
-    for(let i = 0; i < wordArr.length; i++) {
-        if(wrd[i] == wordArr[i]) 
-            wordArr[i] = chalk.white.bgGreen(wordArr[i].toUpperCase());
-        else if(wrd.includes(wordArr[i])) 
-            wordArr[i] = chalk.white.bgYellow(wordArr[i].toUpperCase());
-        else 
-            wordArr[i] = chalk.white.bgBlack(wordArr[i].toUpperCase());
-    }
-
-    const cycledWord = wordArr.join('|');
-    wordChart += cycledWord + '\n';
-    console.log(wordChart);
-    return true;
 }
 
 function random(max) {
@@ -74,6 +78,20 @@ async function guessWord() {
         else if(!validGuess)
             guessWord();
     }
+}
+
+process.openStdin().on('keypress', function(chunk, key) {
+    if(key && key.name === 'c' && key.ctrl) {
+        exitGame = true;
+        console.log('see ya');
+        process.exit();
+    }
+});
+
+try {
+    process.stdin.setRawMode(true);
+} catch (err) {
+    require('tty').setRawMode(true);
 }
 
 guessWord();
